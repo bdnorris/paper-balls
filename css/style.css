@@ -1,0 +1,30 @@
+/*colors:
+181819
+494A4C
+B2B6BA
+DBDEE0
+EDEFF2*/
+
+body, html {
+    height: 100%;
+}
+
+body {
+    background-color: #181819;
+    color: #EDEFF2;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+}
+.video {
+    align-self: center;
+    width: 640px;
+    height: 480px;
+}

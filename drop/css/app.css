@@ -1,0 +1,57 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: rgb(84, 133, 182);
+  background: linear-gradient(-48deg, rgb(84, 133, 182), rgb(155, 77, 202));
+  background: -webkit-linear-gradient(-48deg, rgb(84, 133, 182), rgb(155, 77, 202));
+
+  position: relative;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 4vh;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.wrapper {
+  width:80vw;
+  margin: 30vh auto 34vh auto;
+}
+
+header {
+  height: 6vh;
+}
+
+.drop-wrapper {
+  width: 100%;
+  background-color: #dedeef;
+}
+
+.drop-wrapper form {
+  width: 80vw;
+  height: 30vh;
+  background-color: #dedeef;
+  font-size: 2em;
+  color: #444;
+  margin: 0;
+  position: relative;
+}
+
+.dropzone .dz-message {
+  width:100%;
+  margin:0 auto;
+  position: absolute;
+  top:50%;
+  transform: translateY(-52%);
+}
