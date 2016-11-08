@@ -18,7 +18,7 @@ if (!empty($_FILES)) {
 
    //If filetypes allowed types are found, continue to check filesize:
 
-            if($_FILES["resume"]["size"] < 1000000 AND $_FILES["reference"]["size"] < 1000000 ){
+            if($_FILES["resume"]["size"] < 26214400 AND $_FILES["reference"]["size"] < 26214400 ){
 
               //if both files are below given size limit, allow upload
               //Begin filemove here....
