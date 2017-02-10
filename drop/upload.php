@@ -10,7 +10,7 @@ $storeFolder = 'drops';   //2
 if (!empty($_FILES)) {
 
 //Add the allowed mime-type files to an 'allowed' array
- $allowed = array('application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'video/mp4', 'video/m4v', 'video/quicktime');
+ $allowed = array('application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'video/mp4', 'video/m4v', 'video/quicktime', 'application/photoshop', 'application/illustrator');
  //$allowed = array('image/jpeg', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation');
 //Check uploaded file type is in the above array (therefore valid)
     //if(in_array($_FILES['resume']['type'], $allowed) AND in_array($_FILES['reference']['type'], $allowed)){

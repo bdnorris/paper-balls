@@ -22,7 +22,7 @@ Dropzone.options.dzone = {
     else { done(); }
   }*/
 
-  acceptedFiles: "image/png, image/gif, image/jpeg, application/pdf, video/mp4, video/m4v, video/quicktime",
+  acceptedFiles: "image/png, image/gif, image/jpeg, application/pdf, video/mp4, video/m4v, video/quicktime, application/photoshop, application/illustrator",
   //uploadMultiple: true,
   /*init: function() {
     this.on("successmultiple", function() {
