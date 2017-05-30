@@ -11,3 +11,21 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+// hover event
+// JQUERY
+document.getElementByClassName('dot').hover(
+  function () {
+    // window.clearInterval(one);
+    // console.log("hi");
+    // JQUERY
+    this.stop().addClass('captured').css('animation-name', 'rotateBack')
+  },
+  function () {
+    console.log('#' + this.attr('id'))
+    // setTimeout(function(){
+    this.removeClass('captured').css('animation-name', 'rotate')
+    // startMove('#' + this.attr('id'))
+    // }, 1000);
+  }
+)

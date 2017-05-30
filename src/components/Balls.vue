@@ -1,0 +1,145 @@
+<template>
+  <div class="balls">
+    <div class="dot" id="one" v-on:click="startMove" v-bind:style="[ {top: top}, {left: left} ]">1</div>
+    <div class="dot" id="two" v-bind:style="[ {top: top}, {left: left} ]">2</div>
+    <div class="dot" id="three" v-bind:style="[ {top: top}, {left: left} ]">3</div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'balls',
+  data () {
+    return {
+      // msg: 'Welcome to Your Vue.js App'
+      // position: [top, left]
+      top: 0 + 'px',
+      left: 0 + 'px'
+    }
+  },
+  methods: {
+
+    getRandomIntInclusive: function (min, max) {
+      min = Math.ceil(min)
+      max = Math.floor(max)
+      return Math.floor(Math.random() * (max - min + 1)) + min
+    },
+
+    changePos: function () {
+      alert('changePos started')
+      var dt = this.getRandomIntInclusive(1, window.height() - 128)
+      var dl = this.getRandomIntInclusive(1, window.width() - 128)
+      // console.log(dt + " " + dl);
+      return [dt, dl]
+    },
+
+    offset: function (elt) {
+      console.log(elt)
+      let rect = elt.target.getBoundingClientRect
+      let bodyElt = document.body
+      return {
+        top: rect.top + bodyElt.scrollTop,
+        left: rect.left + bodyElt.scrollLeft
+      }
+    },
+
+    startMove: function (event) {
+      alert('startMove started')
+      // setInterval( function() {
+      // let elem = document.getElementById(event)
+      // console.log(elem)
+      let currentP = this.offset(event)
+      let newP = this.changePos()
+      let x = Math.pow(newP[1] - currentP.left, 2)
+      let y = Math.pow(newP[0] - currentP.top, 2)
+      let distance = Math.sqrt(x + y)
+      let timing = Math.floor(distance * 6)
+      console.log(timing)
+      // $(id).css({ top: newP[0], left: newP[1] });
+      let newSize = this.getRandomIntInclusive(40, 60) + 'px'
+      // JQUERY
+      // id.toggleClass('try')
+      // JQUERY
+      // id.animate({
+      //   top: newP[0], left: newP[1], width: newSize, height: newSize }, timing, function () {
+      //     startMove(id)
+      //   })
+      console.log(newSize)
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.dot {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: aqua;
+  //border-radius: 1.5em;
+  text-align: center;
+  padding-top: 1em;
+  box-sizing: border-box;
+  cursor: pointer;
+  //top: 0;
+  //left: 0;
+  transition: background-color 200ms ease-in, width 200s ease-in, height 200s ease, transform 500ms ease;
+  animation-name: rotate;
+  animation-duration: 4000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+  overflow: visible;
+  transform: rotate(0deg);
+  transform-style: preserve-3d;
+  // transition: transform 1s ease-out;
+  &.try {
+    // transform: rotate(1turn);
+  }
+  &.captured {
+    background-color: gray !important;
+    animation-play-state: paused;
+    // transform: rotate(45deg);
+    // animation-play-state: paused;
+  }
+  &:hover {
+    //transform: none;
+  }
+  //position: absolute;
+  background-color: pink;
+  //top: -1em;
+  //right: -1em;
+}
+
+#one {
+  background-color: aqua;
+}
+#two {
+  background-color: pink;
+}
+#three {
+  background-color: green;
+}
+
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotateBack {
+  from {
+    transform: initial;
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+</style>
