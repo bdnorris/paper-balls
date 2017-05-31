@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="dot" id="one" v-on:click="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">1</div>\
+    <div class="dot" id="one" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">1</div>\
   </div>
 </template>
 
 <script>
+// var dynamics = require('../node_modules/dynamics.js/lib/dynamics.min.js')
+// import dynamics from 'App'
+
 export default {
   name: 'dot',
   data () {
@@ -82,9 +85,19 @@ export default {
       this.$set(this.position, 'top', newP[0] + 'px')
       this.$set(this.position, 'left', newP[1] + 'px')
       this.$set(this.position, 'timing', timing + 'ms')
+    },
+
+    onLoad: function () {
+      // let elem = document.getElementById('one')
+      // this.startMove(elem)
+      // console.log('mounted: ' + elem)
     }
+  },
+  mounted: function () {
+    this.onLoad()
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -102,13 +115,13 @@ export default {
   //top: 0;
   //left: 0;
   // transition: background-color 200ms ease-in, width 200s ease-in, height 200s ease, transform 500ms ease;
-  // transition: left 1s ease, top 1s ease;
-  animation-name: move;
-  animation-duration: 4000ms;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-  animation-delay: 0s;
+  transition: left 1s ease, top 1s ease;
+  // animation-name: move;
+  // animation-duration: 4000ms;
+  // animation-timing-function: linear;
+  // animation-iteration-count: infinite;
+  // animation-fill-mode: forwards;
+  // animation-delay: 0s;
   overflow: visible;
   // transform: rotate(0deg);
   transform-style: preserve-3d;

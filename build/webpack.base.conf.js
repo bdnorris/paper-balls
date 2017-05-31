@@ -2,6 +2,8 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var dynamics = require('dynamics.js')
+// import exec from 'script.exec.js'
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -45,6 +47,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.exec\.js$/,
+        use: [ 'script-loader' ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
