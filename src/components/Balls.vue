@@ -1,6 +1,7 @@
 <template>
-  <div class="balls" >
-    <dot></dot>
+  <div class="balls">
+    <dot my-id="one">1</dot>
+    <dot my-id="two">2</dot>
   </div>
 </template>
 

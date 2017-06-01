@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" id="one" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">1</div>\
+    <div class="dot" :id="my-id" v-on:manual="startMove" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myId }}</div>
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 
 export default {
   name: 'dot',
+  props: ['my-id'],
   data () {
     return {
       // msg: 'Welcome to Your Vue.js App'
@@ -22,9 +23,6 @@ export default {
         timing: 1 + 's'
       }
     }
-  },
-  props: {
-
   },
   methods: {
 
@@ -86,15 +84,26 @@ export default {
       this.$set(this.position, 'left', newP[1] + 'px')
       this.$set(this.position, 'timing', timing + 'ms')
     },
-
-    onLoad: function () {
+    manualE: function () {
+      return new Event('manual', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+      })
+    },
+    triggerEvent: function () {
+      let manual = this.manualE()
+      let elem = document.getElementById('one')
+      elem.dispatchEvent(manual)
+    }
+    // onLoad: function () {
       // let elem = document.getElementById('one')
       // this.startMove(elem)
       // console.log('mounted: ' + elem)
-    }
+    // }
   },
   mounted: function () {
-    this.onLoad()
+    this.triggerEvent()
   }
 }
 
