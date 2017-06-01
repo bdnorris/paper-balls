@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" :id="my-id" v-on:manual="startMove" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myId }}</div>
+    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 export default {
   name: 'dot',
-  props: ['my-id'],
+  props: ['myid'],
   data () {
     return {
       // msg: 'Welcome to Your Vue.js App'

@@ -1,7 +1,7 @@
 <template>
   <div class="balls">
-    <dot my-id="one">1</dot>
-    <dot my-id="two">2</dot>
+    <dot myid="one">1</dot>
+    <dot myid="two">2</dot>
   </div>
 </template>
 
