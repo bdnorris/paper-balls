@@ -2,6 +2,7 @@
   <div class="balls">
     <dot myid="one">1</dot>
     <dot myid="two">2</dot>
+    <dot myid="three">3</dot>
   </div>
 </template>
 

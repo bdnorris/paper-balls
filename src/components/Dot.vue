@@ -93,8 +93,10 @@ export default {
     },
     triggerEvent: function () {
       let manual = this.manualE()
-      let elem = document.getElementById('one')
-      elem.dispatchEvent(manual)
+      let dots = document.getElementsByClassName('dot')
+      for (let dot of dots) {
+        dot.dispatchEvent(manual)
+      }
     }
     // onLoad: function () {
       // let elem = document.getElementById('one')
