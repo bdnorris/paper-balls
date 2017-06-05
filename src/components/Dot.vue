@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
+    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
   </div>
 </template>
 
@@ -21,6 +21,9 @@ export default {
         top: 0 + 'px',
         left: 0 + 'px',
         timing: 1 + 's'
+      },
+      animating: {
+        playable: true
       }
     }
   },
@@ -58,15 +61,16 @@ export default {
       let currentP = {left: 0, top: 0}
       currentP.left = event.target.offsetLeft
       currentP.top = event.target.offsetTop
-      console.dir(currentP)
+      // console.dir(currentP)
       let newP = this.changePos()
       let x = Math.pow(newP[1] - currentP.left, 2)
       let y = Math.pow(newP[0] - currentP.top, 2)
       let distance = Math.sqrt(x + y)
       let timing = Math.floor(distance * 6)
-      console.log('timing: ' + timing)
+      // console.log('timing: ' + timing)
+
       // $(id).css({ top: newP[0], left: newP[1] });
-      let newSize = this.getRandomIntInclusive(40, 60) + 'px'
+      // let newSize = this.getRandomIntInclusive(40, 60) + 'px'
       // JQUERY
       // id.toggleClass('try')
       // JQUERY
@@ -74,15 +78,44 @@ export default {
       //   top: newP[0], left: newP[1], width: newSize, height: newSize }, timing, function () {
       //     startMove(id)
       //   })
-      console.log('newP: ' + newP)
-      console.log('newSize: ' + newSize)
+
+      // console.log('newP: ' + newP)
+      // console.log('newSize: ' + newSize)
+
       // return {
         // top: newP.top + 'px',
         // left: newP.left + 'px'
       // }
-      this.$set(this.position, 'top', newP[0] + 'px')
-      this.$set(this.position, 'left', newP[1] + 'px')
-      this.$set(this.position, 'timing', timing + 'ms')
+      if (this.animating.playable === true) {
+        this.$set(this.position, 'top', newP[0] + 'px')
+        this.$set(this.position, 'left', newP[1] + 'px')
+        this.$set(this.position, 'timing', timing + 'ms')
+        this.$set(this.animating, 'playable', true)
+      }
+    },
+    pause: function (event) {
+      let currentPos = {}
+      // currentPos.left = event.target.style.left
+      // currentPos.top = event.target.style.top
+      this.$set(this.animating, 'playable', false)
+      // event.target.style.transitionProperty = 'none'
+      // this.$set(this.position, 'top', currentPos.top)
+      // event.target.top = currentPos.top
+      // this.$set(this.position, 'left', currentPos.left)
+      // event.target.left = currentPos.left
+      let computedStyle = window.getComputedStyle(event.target)
+      let left = computedStyle.getPropertyValue('left')
+      let top = computedStyle.getPropertyValue('top')
+      event.target.style.left = left
+      event.target.style.top = top
+      // boxOne.classList.remove('horizTranslate');
+      console.log('left: ' + currentPos.left)
+      console.log('top: ' + currentPos.top)
+      console.log('top: ' + this.animating.playing)
+    },
+    startAgain: function (event) {
+      this.$set(this.animating, 'playable', true)
+      this.startMove(event)
     },
     manualE: function () {
       return new Event('manual', {
