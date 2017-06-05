@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
+    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:click="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
   </div>
 </template>
 
@@ -103,6 +103,7 @@ export default {
       // event.target.top = currentPos.top
       // this.$set(this.position, 'left', currentPos.left)
       // event.target.left = currentPos.left
+      // https://codepen.io/Zeaklous/pen/GokAm
       let computedStyle = window.getComputedStyle(event.target)
       let left = computedStyle.getPropertyValue('left')
       let top = computedStyle.getPropertyValue('top')
