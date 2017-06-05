@@ -94,8 +94,9 @@ export default {
     triggerEvent: function () {
       let manual = this.manualE()
       let dots = document.getElementsByClassName('dot')
-      for (let dot of dots) {
-        dot.dispatchEvent(manual)
+      console.dir(dots)
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].dispatchEvent(manual)
       }
     }
     // onLoad: function () {
