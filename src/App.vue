@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background: #3a3c3d url('assets/pink_dust.png') repeat top left;
+  background-attachment: fixed;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

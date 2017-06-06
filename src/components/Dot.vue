@@ -37,14 +37,17 @@ export default {
 
     changePos: function () {
       // alert('changePos started')
-      let dt = this.getRandomIntInclusive(1, window.innerHeight - 200)
-      let dl = this.getRandomIntInclusive(1, window.innerWidth - 200)
-      console.log(dt + ' ' + dl)
+      let elementSize = 150 * 2
+      let wih = window.innerHeight - elementSize
+      let wiw = window.innerWidth - elementSize
+      let dt = this.getRandomIntInclusive(1, wih)
+      let dl = this.getRandomIntInclusive(1, wiw)
+      // console.log(wih + ' ' + wiw + ' | ' + dt + ' ' + dl)
       return [dt, dl]
     },
 
     offset: function (elt) {
-      console.dir(elt)
+      // console.dir(elt)
       let rect = elt.target.getBoundingClientRect
       let bodyElt = document.body
       return {
@@ -52,7 +55,12 @@ export default {
         left: rect.left + bodyElt.scrollLeft
       }
     },
-
+    calculateTiming: function (newP, left, top) {
+      let x = Math.pow(newP[1] - left, 2)
+      let y = Math.pow(newP[0] - top, 2)
+      let distance = Math.sqrt(x + y)
+      return Math.floor(distance / 60)
+    },
     startMove: function (event) {
       // alert('startMove started')
       // setInterval( function() {
@@ -63,10 +71,7 @@ export default {
       currentP.top = event.target.offsetTop
       // console.dir(currentP)
       let newP = this.changePos()
-      let x = Math.pow(newP[1] - currentP.left, 2)
-      let y = Math.pow(newP[0] - currentP.top, 2)
-      let distance = Math.sqrt(x + y)
-      let timing = Math.floor(distance / 60)
+      let timing = this.calculateTiming(newP, currentP.left, currentP.top)
       // console.log('timing: ' + timing)
 
       // $(id).css({ top: newP[0], left: newP[1] });
@@ -93,6 +98,33 @@ export default {
         this.$set(this.animating, 'playable', true)
       }
     },
+    wrap: function (direction, event) {
+      let numFrames = 6
+      let frameHeight = 150 // pixels
+      // let direction = direction
+      let newFrameHeight = ''
+      // if (Number.isInteger(numFrames)) {
+      if (direction === 'forwards') {
+        newFrameHeight = frameHeight
+      } else if (direction === 'reverse') {
+        numFrames = numFrames - 1
+        newFrameHeight = (0 - frameHeight * numFrames)
+      } else {}
+      for (let i = 0; i <= numFrames; i++) {
+        // (function(i){
+        window.setTimeout(function () {
+          // console.log('frameHeight: ' + newFrameHeight + '...' + i)
+          // $(jQObj).css('background-position', '0 '+newFrameHeight+'px')
+          event.target.style.backgroundPosition = '0 ' + newFrameHeight + 'px'
+          if (direction === 'forwards') {
+            newFrameHeight = newFrameHeight - frameHeight
+          } else if (direction === 'reverse') {
+            newFrameHeight = newFrameHeight + frameHeight
+          } else {}
+        }, i * 80)
+      }
+      // }
+    },
     pause: function (event) {
       // let currentPos = {}
       // currentPos.left = event.target.style.left
@@ -105,6 +137,7 @@ export default {
       // event.target.left = currentPos.left
       // https://codepen.io/Zeaklous/pen/GokAm
       let computedStyle = window.getComputedStyle(event.target)
+      console.dir(computedStyle)
       let left = computedStyle.getPropertyValue('left')
       let top = computedStyle.getPropertyValue('top')
       event.target.style.left = left
@@ -113,9 +146,11 @@ export default {
       // console.log('left: ' + currentPos.left)
       // console.log('top: ' + currentPos.top)
       // console.log('top: ' + this.animating.playing)
+      this.wrap('forwards', event)
     },
     startAgain: function (event) {
       this.$set(this.animating, 'playable', true)
+      this.wrap('reverse', event)
       this.startMove(event)
     },
     manualE: function () {
@@ -171,11 +206,16 @@ export default {
   overflow: visible;
   // transform: rotate(0deg);
   transform-style: preserve-3d;
+  background-image: url('../assets/LayeredPaperBall_reel.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 150px;
+  height: 150px;
   // transition: transform 1s ease-out;
   &.captured {
     // background-color: gray !important;
     // animation-play-state: paused;
-    transform: rotate(45deg);
+    // transform: rotate(45deg);
     animation-play-state: paused;
     // animation-name: rotateBack;
     // animation-duration: 2s;
@@ -189,20 +229,21 @@ export default {
     //transform: none;
   }
   //position: absolute;
-  background-color: pink;
+  // background-color: pink;
+  background-color: transparent;
   //top: -1em;
   //right: -1em;
 }
 
-#one {
-  background-color: aqua;
-}
-#two {
-  background-color: pink;
-}
-#three {
-  background-color: green;
-}
+// #one {
+//   background-color: aqua;
+// }
+// #two {
+//   background-color: pink;
+// }
+// #three {
+//   background-color: green;
+// }
 
 
 
