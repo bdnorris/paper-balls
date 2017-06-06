@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:click="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
+    <div class="dot" v-bind:class="{ captured: animating.playable == false }" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:click="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
   </div>
 </template>
 
@@ -37,9 +37,9 @@ export default {
 
     changePos: function () {
       // alert('changePos started')
-      let dt = this.getRandomIntInclusive(1, window.innerHeight - 128)
-      let dl = this.getRandomIntInclusive(1, window.innerWidth - 128)
-      // console.log(dt + " " + dl);
+      let dt = this.getRandomIntInclusive(1, window.innerHeight - 200)
+      let dl = this.getRandomIntInclusive(1, window.innerWidth - 200)
+      console.log(dt + ' ' + dl)
       return [dt, dl]
     },
 
@@ -66,7 +66,7 @@ export default {
       let x = Math.pow(newP[1] - currentP.left, 2)
       let y = Math.pow(newP[0] - currentP.top, 2)
       let distance = Math.sqrt(x + y)
-      let timing = Math.floor(distance * 6)
+      let timing = Math.floor(distance / 60)
       // console.log('timing: ' + timing)
 
       // $(id).css({ top: newP[0], left: newP[1] });
@@ -89,12 +89,12 @@ export default {
       if (this.animating.playable === true) {
         this.$set(this.position, 'top', newP[0] + 'px')
         this.$set(this.position, 'left', newP[1] + 'px')
-        this.$set(this.position, 'timing', timing + 'ms')
+        this.$set(this.position, 'timing', timing + 's')
         this.$set(this.animating, 'playable', true)
       }
     },
     pause: function (event) {
-      let currentPos = {}
+      // let currentPos = {}
       // currentPos.left = event.target.style.left
       // currentPos.top = event.target.style.top
       this.$set(this.animating, 'playable', false)
@@ -110,9 +110,9 @@ export default {
       event.target.style.left = left
       event.target.style.top = top
       // boxOne.classList.remove('horizTranslate');
-      console.log('left: ' + currentPos.left)
-      console.log('top: ' + currentPos.top)
-      console.log('top: ' + this.animating.playing)
+      // console.log('left: ' + currentPos.left)
+      // console.log('top: ' + currentPos.top)
+      // console.log('top: ' + this.animating.playing)
     },
     startAgain: function (event) {
       this.$set(this.animating, 'playable', true)
@@ -161,25 +161,29 @@ export default {
   //top: 0;
   //left: 0;
   // transition: background-color 200ms ease-in, width 200s ease-in, height 200s ease, transform 500ms ease;
-  transition: left 1s ease, top 1s ease;
-  // animation-name: move;
-  // animation-duration: 4000ms;
-  // animation-timing-function: linear;
-  // animation-iteration-count: infinite;
-  // animation-fill-mode: forwards;
-  // animation-delay: 0s;
+  transition: left 1s ease, top 1s ease, transform 1s linear;
+  animation-name: rotate;
+  animation-duration: 4000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
   overflow: visible;
   // transform: rotate(0deg);
   transform-style: preserve-3d;
   // transition: transform 1s ease-out;
-  &.try {
-    // transform: rotate(1turn);
-  }
   &.captured {
-    background-color: gray !important;
-    animation-play-state: paused;
-    // transform: rotate(45deg);
+    // background-color: gray !important;
     // animation-play-state: paused;
+    transform: rotate(45deg);
+    animation-play-state: paused;
+    // animation-name: rotateBack;
+    // animation-duration: 2s;
+    // animation-timing-function: linear;
+    // animation-iteration-count: 1;
+    // animation-fill-mode: forwards;
+    // animation-delay: 0s;
+    // transition: transform 1s ease;
   }
   &:hover {
     //transform: none;
