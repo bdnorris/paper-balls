@@ -3,17 +3,18 @@
     <!-- <img src="./assets/logo.png"> -->
     <!-- <hello></hello> -->
     <balls></balls>
+    <content></content>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Content from './components/Content'
 import Balls from './components/Balls'
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    Content,
     Balls
   }
 }

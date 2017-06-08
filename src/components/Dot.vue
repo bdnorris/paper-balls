@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dot" v-bind:class="{ captured: animating.playable == false }" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:mouseover="pause" v-on:click="pause" v-on:mouseout="startAgain" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]">{{ myid }}</div>
+    <div class="dot" v-bind:class="{ captured: animating.playable == false }" :id="myid" v-on:manual="startMove" v-on:transitionend="startMove" v-on:click="pause" v-bind:style="[ {top: position.top}, {left: position.left}, {transitionDuration: position.timing} ]"> </div>
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default {
         timing: 1 + 's'
       },
       animating: {
-        playable: true
+        playable: true,
+        clicked: false
       }
     }
   },
@@ -37,7 +38,7 @@ export default {
 
     changePos: function () {
       // alert('changePos started')
-      let elementSize = 150 * 2
+      let elementSize = 150 * 3
       let wih = window.innerHeight - elementSize
       let wiw = window.innerWidth - elementSize
       let dt = this.getRandomIntInclusive(1, wih)
@@ -97,6 +98,7 @@ export default {
         this.$set(this.position, 'timing', timing + 's')
         this.$set(this.animating, 'playable', true)
       }
+      // console.log(window.getComputedStyle(event.target).top)
     },
     wrap: function (direction, event) {
       let numFrames = 6
@@ -127,26 +129,32 @@ export default {
     },
     pause: function (event) {
       // let currentPos = {}
-      // currentPos.left = event.target.style.left
-      // currentPos.top = event.target.style.top
-      this.$set(this.animating, 'playable', false)
-      // event.target.style.transitionProperty = 'none'
-      // this.$set(this.position, 'top', currentPos.top)
-      // event.target.top = currentPos.top
-      // this.$set(this.position, 'left', currentPos.left)
-      // event.target.left = currentPos.left
-      // https://codepen.io/Zeaklous/pen/GokAm
-      let computedStyle = window.getComputedStyle(event.target)
-      console.dir(computedStyle)
-      let left = computedStyle.getPropertyValue('left')
-      let top = computedStyle.getPropertyValue('top')
-      event.target.style.left = left
-      event.target.style.top = top
-      // boxOne.classList.remove('horizTranslate');
-      // console.log('left: ' + currentPos.left)
-      // console.log('top: ' + currentPos.top)
-      // console.log('top: ' + this.animating.playing)
-      this.wrap('forwards', event)
+      if (this.animating.clicked === false) {
+        // currentPos.left = event.target.style.left
+        // currentPos.top = event.target.style.top
+        this.$set(this.animating, 'playable', false)
+        this.$set(this.animating, 'clicked', true)
+        // event.target.style.transitionProperty = 'none'
+        // this.$set(this.position, 'top', currentPos.top)
+        // event.target.top = currentPos.top
+        // this.$set(this.position, 'left', currentPos.left)
+        // event.target.left = currentPos.left
+        // https://codepen.io/Zeaklous/pen/GokAm
+        let computedStyle = window.getComputedStyle(event.target)
+        // console.dir(computedStyle)
+        let left = computedStyle.getPropertyValue('left')
+        let top = computedStyle.getPropertyValue('top')
+        event.target.style.left = left
+        event.target.style.top = top
+        // boxOne.classList.remove('horizTranslate');
+        // console.log('left: ' + currentPos.left)
+        // console.log('top: ' + currentPos.top)
+        // console.log('top: ' + this.animating.playing)
+        this.wrap('forwards', event)
+      } else {
+        this.$set(this.animating, 'clicked', false)
+        this.startAgain(event)
+      }
     },
     startAgain: function (event) {
       this.$set(this.animating, 'playable', true)
@@ -184,9 +192,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .dot {
-  position: relative;
-  width: 50px;
-  height: 50px;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 150px;
+  height: 150px;
   background-color: aqua;
   //border-radius: 1.5em;
   text-align: center;
@@ -211,6 +221,7 @@ export default {
   background-position: 0 0;
   width: 150px;
   height: 150px;
+  transform: rotate(0.1deg);
   // transition: transform 1s ease-out;
   &.captured {
     // background-color: gray !important;
