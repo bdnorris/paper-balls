@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Content from './components/Content'
+import Nameplate from './components/Nameplate'
 import Balls from './components/Balls'
 
 export default {
   name: 'app',
   components: {
-    Content,
+    Nameplate,
     Balls
   }
 }

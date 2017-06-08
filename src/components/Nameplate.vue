@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'content',
+  name: 'nameplate',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

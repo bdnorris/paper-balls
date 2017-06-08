@@ -38,7 +38,7 @@ export default {
 
     changePos: function () {
       // alert('changePos started')
-      let elementSize = 150 * 3
+      let elementSize = 150 * 2
       let wih = window.innerHeight - elementSize
       let wiw = window.innerWidth - elementSize
       let dt = this.getRandomIntInclusive(1, wih)
@@ -171,7 +171,7 @@ export default {
     triggerEvent: function () {
       let manual = this.manualE()
       let dots = document.getElementsByClassName('dot')
-      console.dir(dots)
+      // console.dir(dots)
       for (let i = 0; i < dots.length; i++) {
         dots[i].dispatchEvent(manual)
       }
