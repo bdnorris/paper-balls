@@ -1,12 +1,15 @@
 <template>
-  <div>{{props.letter}}</div>
+  <div>{{ letter }}</div>
 </template>
 
 <script>
 export default {
   name: 'letter',
   props: {
-    'letter': theLetter
+    letter: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
