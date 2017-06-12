@@ -1,12 +1,18 @@
 <template>
   <div class="content">
     <h1>{{ msg }}</h1>
+    <letter theLetter="b"></letter>
   </div>
 </template>
 
 <script>
+import Letter from './Letter'
+
 export default {
   name: 'nameplate',
+  components: {
+    Letter
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

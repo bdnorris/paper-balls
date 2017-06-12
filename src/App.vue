@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png"> -->
     <!-- <hello></hello> -->
     <balls></balls>
-    <content></content>
+    <nameplate></nameplate>
   </div>
 </template>
 

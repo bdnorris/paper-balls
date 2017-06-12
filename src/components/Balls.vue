@@ -3,9 +3,6 @@
     <dot myid="one">1</dot>
     <dot myid="two">2</dot>
     <dot myid="three">3</dot>
-    <dot myid="four">4</dot>
-    <dot myid="five">5</dot>
-    <dot myid="six">6</dot>
   </div>
 </template>
 

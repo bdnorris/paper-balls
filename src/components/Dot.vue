@@ -216,9 +216,10 @@ export default {
   overflow: visible;
   // transform: rotate(0deg);
   transform-style: preserve-3d;
-  background-image: url('../assets/LayeredPaperBall_reel.png');
+  background-image: url('../assets/LayeredPaperBall_reel_resized.png');
   background-repeat: no-repeat;
   background-position: 0 0;
+  background-size: cover;
   width: 150px;
   height: 150px;
   transform: rotate(0.1deg);
