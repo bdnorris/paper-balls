@@ -2,7 +2,8 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-var dynamics = require('dynamics.js')
+// var dynamics = require('dynamics.js')
+// var pixi = require("pixi.js");
 // import exec from 'script.exec.js'
 
 function resolve (dir) {
@@ -20,6 +21,14 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  // externals: {
+  //   'pixi': 'pixi'
+  // },
+  // plugins :[
+  //   new webpack.ProvidePlugin({
+  //          pixi: "pixi"
+  //      })
+  //    ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
@@ -73,7 +82,12 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
-      }
+      },
+			{
+				test: /\.json$/,
+				include: path.join(__dirname, 'node_modules', 'pixi.js'),
+				loader: 'json',
+			},
     ]
   }
 }

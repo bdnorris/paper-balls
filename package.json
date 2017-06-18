@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "dynamics.js": "^1.1.5",
+    "pixi.js": "^4.5.3",
     "vue": "^2.3.3"
   },
   "devDependencies": {
