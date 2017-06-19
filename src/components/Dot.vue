@@ -8,10 +8,8 @@
 // var dynamics = require('../node_modules/dynamics.js/lib/dynamics.min.js')
 // import dynamics from 'App'
 
-import * as PIXI from 'pixi.js'
-
-console.log('pixi')
-console.dir(PIXI)
+// console.log('pixi')
+// console.dir(PIXI)
 
 export default {
   name: 'dot',
