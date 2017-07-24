@@ -41,9 +41,10 @@ export default {
       let elementSize = 150 * 2
       let wih = window.innerHeight - elementSize
       let wiw = window.innerWidth - elementSize
+      // console.log(wih + ' | ' + wiw)
       let dt = this.getRandomIntInclusive(1, wih)
       let dl = this.getRandomIntInclusive(1, wiw)
-      // console.log(wih + ' ' + wiw + ' | ' + dt + ' ' + dl)
+      console.log(wih + ' ' + wiw + ' | ' + dt + ' ' + dl)
       return [dt, dl]
     },
 
@@ -70,8 +71,8 @@ export default {
       let currentP = {left: 0, top: 0}
       currentP.left = event.target.offsetLeft
       currentP.top = event.target.offsetTop
-      // console.dir(currentP)
       let newP = this.changePos()
+      console.dir(newP)
       let timing = this.calculateTiming(newP, currentP.left, currentP.top)
       // console.log('timing: ' + timing)
 
@@ -193,8 +194,8 @@ export default {
 <style scoped lang="scss">
 .dot {
   position: absolute;
-  top: 1em;
-  left: 1em;
+  top: 1px;
+  left: 1px;
   width: 150px;
   height: 150px;
   background-color: aqua;

@@ -1,27 +1,31 @@
 <template>
-  <div class="letter" v-on:manual="startMove" >{{ letter }}</div>
+  <div class="content" v-on:click="wrap">
+    <h1>{{ msg }}</h1>
+    <h2>Web <swap info="['Designer', 'Developer']"></swap></h2>
+  </div>
 </template>
 
 <script>
+import Swap from './Swap'
+
 export default {
-  name: 'letter',
-  props: {
-    letter: {
-      type: String,
-      required: true
-    }
+  name: 'sheet',
+  components: {
+    Swap
   },
   data () {
     return {
-      animating: {
-        playable: true,
-        clicked: false
-      }
+      msg: 'Brian Norris'
     }
   },
-  methods: {
+  props: {
 
-    wrap: function (direction, event) {
+  },
+  methods: {
+    wrap: function (event) {
+      event.target.style.backgroundColor = 'white'
+    },
+    wrap2: function (direction, event) {
       let numFrames = 6
       let frameHeight = 150 // pixels
       // let direction = direction
@@ -50,15 +54,57 @@ export default {
     }
   },
   mounted: function () {
-    this.triggerEvent()
+
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .letter {
-    
+
+$base-a: 11;
+$base-b: 8.5;
+
+.content {
+  $factor: 8;
+  background-color: transparent;
+  border: 1px solid white;
+  width: $base-b * $factor + vw;
+  height: $base-a * $factor + vw;
+  margin: 0 auto;
+  flex: 0 1 auto;
+  text-align: left;
+  padding: 2em;
+}
+
+@media screen and (min-width: 960px) {
+  .content {
+    $factor: 5;
+    width: $base-a * $factor + vw;
+    height: $base-b * $factor + vw;
   }
+}
+
+h1 {
+  font-size: 3.333em;
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0 0 0.5em 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
 </style>
