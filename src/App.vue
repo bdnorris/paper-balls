@@ -2,20 +2,27 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <!-- <hello></hello> -->
-    <balls></balls>
-    <sheet></sheet>
+    <balls balls="1"></balls>
+    <button type="button" name="button" v-on:click="addComponent">Add</button>
   </div>
 </template>
 
 <script>
-import Sheet from './components/Sheet'
+// import Sheet from './components/Sheet'
 import Balls from './components/Balls'
 
 export default {
   name: 'app',
   components: {
-    Sheet,
     Balls
+  },
+  props: {
+    ballsAmount: 1
+  },
+  methods: {
+    addComponent: function () {
+
+    }
   }
 }
 </script>

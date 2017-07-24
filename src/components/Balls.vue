@@ -13,10 +13,6 @@ export default {
   name: 'balls',
   data () {
     return {
-      // msg: 'Welcome to Your Vue.js App'
-      // position: [top, left]
-      // top: 0 + 'px',
-      // left: 0 + 'px'
       position: {
         top: 0 + 'px',
         left: 0 + 'px',
@@ -26,12 +22,6 @@ export default {
   },
   components: {
     Dot
-  },
-  props: {
-
-  },
-  methods: {
-
   }
 }
 </script>
