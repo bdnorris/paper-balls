@@ -2,8 +2,9 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <!-- <hello></hello> -->
-    <balls balls="1"></balls>
+    <balls :balls="balls"></balls>
     <button type="button" name="button" v-on:click="addComponent">Add</button>
+    <button type="button" name="button" v-on:click="removeComponent">Remove</button>
   </div>
 </template>
 
@@ -13,15 +14,22 @@ import Balls from './components/Balls'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      balls: 1
+    }
+  },
   components: {
     Balls
   },
-  props: {
-    ballsAmount: 1
-  },
   methods: {
     addComponent: function () {
-
+      this.balls++
+      // console.log(this.balls)
+    },
+    removeComponent: function () {
+      this.balls--
+      // console.log(this.balls)
     }
   }
 }
