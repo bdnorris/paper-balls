@@ -61,7 +61,7 @@ export default {
       let x = Math.pow(newP[1] - left, 2)
       let y = Math.pow(newP[0] - top, 2)
       let distance = Math.sqrt(x + y)
-      return Math.floor(distance / 60)
+      return [distance, Math.floor(distance / 60)]
     },
     startMove: function (event) {
       // alert('startMove started')
@@ -72,8 +72,15 @@ export default {
       currentP.left = event.target.offsetLeft
       currentP.top = event.target.offsetTop
       let newP = this.changePos()
-      console.dir(newP)
-      let timing = this.calculateTiming(newP, currentP.left, currentP.top)
+      // console.dir(newP)
+      let timing = this.calculateTiming(newP, currentP.left, currentP.top)[1]
+      // check distance
+      let distance = this.calculateTiming(newP, currentP.left, currentP.top)[0]
+      console.log('distance: ' + distance)
+      if (distance < 100) {
+        newP = this.changePos()
+        timing = this.calculateTiming(newP, currentP.left, currentP.top)[1]
+      }
       // console.log('timing: ' + timing)
 
       // $(id).css({ top: newP[0], left: newP[1] });
