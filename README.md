@@ -1,4 +1,4 @@
-# personal-site
+# paper-balls
 
 > A Vue.js project
 
